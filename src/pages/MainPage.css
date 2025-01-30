@@ -1,0 +1,25 @@
+/* Estilos para centrar la página */
+.main-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    width: 100vw; /* Ocupa todo el ancho de la pantalla */
+    background-color: #f4f4f4; /* Color de fondo */
+    text-align: center; /* Centrar texto */
+  }
+  
+  /* Estilos para la caja de opciones */
+  .main-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    width: 400px;
+  }
+  
+  /* Espacio entre botones */
+  .main-card .btn {
+    width: 100%;
+  }
+  

@@ -1,0 +1,39 @@
+/* Contenedor principal del Dashboard */
+.dashboard-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    width: 100vw; /* Ocupa todo el ancho de la pantalla */
+    background-color: #f8f9fa; /* Color de fondo */
+    text-align: center;
+  }
+  
+  /* Caja de contenido */
+  .dashboard-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-height: 80vh; /* Evita que crezca demasiado */
+    overflow-y: auto; /* Permite scroll si hay muchas citas */
+  }
+  
+  /* Estilo para cada cita */
+  .cita-item {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+  }
+  
+  /* Estilo para los botones */
+  .cita-buttons button {
+    margin-left: 5px;
+  }
+  

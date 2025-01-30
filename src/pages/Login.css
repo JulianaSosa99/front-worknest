@@ -1,0 +1,50 @@
+/* Estilos globales para centrar todo */
+.login-container {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100vw; /* Ocupa todo el ancho de la pantalla */
+  background-color: #f4f4f4; /* Color de fondo */
+}
+
+/* Estilos para la tarjeta de login */
+.login-card {
+  width: 400px; /* Ancho del card */
+  padding: 30px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+  text-align: center; /* Centrar el texto */
+}
+
+/* Títulos */
+.login-card h2 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Input */
+.login-card .form-control {
+  margin-bottom: 15px;
+}
+
+/* Botones */
+.login-card .btn {
+  width: 100%;
+}
+
+/* Espacio entre el botón de login y el de registro */
+.login-card .register-link {
+  margin-top: 15px;
+}
+ 
+.logo-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.login-logo {
+  width: 120px; /* Ajusta el tamaño */
+  height: auto;
+}
