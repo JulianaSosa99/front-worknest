@@ -10,7 +10,7 @@ function PlanificarTareas() {
   // Función para obtener las tareas
   const fetchTareas = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/api/tareas", {
+      const response = await axios.get("https://api-getaway-freelancer.azure-api.net/planificador/api/tareas", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTareas(response.data);
