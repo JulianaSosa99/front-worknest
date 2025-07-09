@@ -12,7 +12,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://api-management-freelancers.azure-api.net/api/freelancer/register", {
+      await axios.post("https://api-getaway-freelancer.azure-api.net/login/api/freelancer/register", {
         nombre: name,
         correo: email,
         contrasena: password,

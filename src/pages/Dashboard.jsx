@@ -19,7 +19,7 @@ function Dashboard() {
   const fetchCitas = async () => {
     try {
       const response = await axios.get(
-        `https://api-management-freelancers.azure-api.net/gestion/api/citas/freelancer/citas`,
+        `https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -33,7 +33,7 @@ function Dashboard() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://api-management-freelancers.azure-api.net/gestion/api/citas/delete/${id}`,
+        `https://api-getaway-freelancer.azure-api.net/citas/api/citas/delete/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

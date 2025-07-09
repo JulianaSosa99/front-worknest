@@ -22,7 +22,7 @@ function CrearTarea() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://api-management-freelancers.azure-api.net/tareas/api/tareas", formData, {
+      await axios.post("https://api-getaway-freelancer.azure-api.net/planificador/api/tareas", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/planificar-tareas");

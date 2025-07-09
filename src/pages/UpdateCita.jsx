@@ -22,7 +22,7 @@ function UpdateCita() {
   useEffect(() => {
     const fetchCitas = async () => {
       try {
-        const response = await axios.get("https://api-management-freelancers.azure-api.net/gestion/api/citas/freelancer/citas", {
+        const response = await axios.get("https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCitas(response.data);
@@ -63,7 +63,7 @@ function UpdateCita() {
     try {
       console.log("Datos enviados al backend:", formData);
       await axios.put(
-        `https://api-management-freelancers.azure-api.net/gestion/api/citas/freelancer/citas/${id}`,
+        `https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas/${id}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

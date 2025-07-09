@@ -19,7 +19,7 @@ function CrearCita() {
   useEffect(() => {
     const fetchCitas = async () => {
       try {
-        const response = await axios.get("https://api-management-freelancers.azure-api.net/gestion/api/citas/freelancer/citas", {
+        const response = await axios.get("https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCitas(response.data);
@@ -55,7 +55,7 @@ function CrearCita() {
 
     try {
       // Intentar crear la cita
-      await axios.post("https://api-management-freelancers.azure-api.net/gestion/api/citas/freelancer/citas", formData, {
+      await axios.post("https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

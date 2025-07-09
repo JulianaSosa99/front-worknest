@@ -18,7 +18,7 @@ function UpdateTarea() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://api-management-freelancers.azure-api.net/tareas/api/tareas/${id}`, formData, {
+      await axios.put(`https://api-getaway-freelancer.azure-api.net/planificador/api/tareas/${id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/planificar-tareas");

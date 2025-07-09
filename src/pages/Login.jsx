@@ -20,7 +20,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://api-management-freelancers.azure-api.net/api/freelancer/login",
+        "https://api-getaway-freelancer.azure-api.net/login/api/freelancer/login",
         formData
       );
       localStorage.setItem("token", response.data.token);

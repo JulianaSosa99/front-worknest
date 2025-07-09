@@ -19,7 +19,7 @@ function DashboardTareas() {
   const fetchTareas = async () => {
     try {
       const response = await axios.get(
-        "https://api-management-freelancers.azure-api.net/tareas/api/tareas",
+        "https://api-getaway-freelancer.azure-api.net/planificador/api/tareas",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -33,7 +33,7 @@ function DashboardTareas() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://api-management-freelancers.azure-api.net/tareas/api/tareas/${id}`,
+        `https://api-getaway-freelancer.azure-api.net/planificador/api/tareas/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

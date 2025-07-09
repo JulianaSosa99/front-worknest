@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import axios from "axios";
 
 const EstimarCostos = () => {
@@ -31,7 +31,7 @@ const EstimarCostos = () => {
   const obtenerEstimaciones = async () => {
     try {
       const response = await axios.get(
-        "https://api-management-freelancers.azure-api.net/estimador/api/estimaciones",
+        "https://api-getaway-freelancer.azure-api.net/api/estimaciones",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ const EstimarCostos = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "https://api-management-freelancers.azure-api.net/estimador/api/estimaciones",
+        "https://api-getaway-freelancer.azure-api.net/api/estimaciones",
         { ...formulario },
         {
           headers: {
