@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import "./MainPage.css"; // Importamos el CSS
+import "./MainPage.css";
 
 function MainPage() {
   const navigate = useNavigate();
 
   const handleNavigate = (path) => {
     navigate(path);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -28,9 +33,15 @@ function MainPage() {
           </button>
           <button
             className="btn btn-warning"
-            onClick={() => navigate("/estimar-costos")}
+            onClick={() => handleNavigate("/estimar-costos")}
           >
             Estimar Costos
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={handleLogout}
+          >
+            Cerrar Sesión
           </button>
         </div>
       </div>
