@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./login.css"; // Asegúrate de importar el CSS que contiene las clases como login-container, login-card, etc.
+import "./Login.css"; 
 
 function Register() {
   const [name, setName] = useState("");
