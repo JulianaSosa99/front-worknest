@@ -1,6 +1,3 @@
-/* =============================/* =============================
-   FUENTE GLOBAL Y FONDO ANIMADO CON BURBUJAS
-============================= */
 .cita-container {
     position: relative;
     min-height: 100vh;
@@ -15,7 +12,7 @@
     padding: 60px 20px;
     box-sizing: border-box;
     overflow: hidden;
-    z-index: 0;
+    z-index: 1;
 }
 
 @keyframes gradientMove {
@@ -76,6 +73,9 @@
     max-width: 800px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     animation: fadeIn 0.5s ease;
+    z-index: 2;
+    /* 👈 LO MÁS IMPORTANTE */
+
 }
 
 @keyframes fadeIn {
@@ -122,9 +122,10 @@
     width: 100%;
     padding: 16px 18px;
     font-size: 15.5px;
-    border: 1px solid #ccd3dc;
+    border: 1px solid #000e21;
     border-radius: 16px;
-    background-color: #ffffff;
+    background-color: #000000;
+    color: #000;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 

@@ -1,23 +1,58 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./Cita.css";
 
 function UpdateCita() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [formData, setFormData] = useState(() => {
-    const cita = state?.cita || {};
-    if (cita.fechaHora) {
-      cita.fechaHora = cita.fechaHora.slice(0, 16);
-    }
-    return cita;
+
+  const [formData, setFormData] = useState({
+    descripcion: "",
+    fechaHora: "",
+    cliente: "",
+    emailCliente: "",
   });
+
   const [error, setError] = useState("");
   const [citas, setCitas] = useState([]);
-
   const token = localStorage.getItem("token");
+
+  console.log("🚩 useLocation state:", state);
+
+  useEffect(() => {
+    const cargarDatosCita = async () => {
+      if (state?.cita) {
+        console.log("✅ Cargando cita desde state:", state.cita);
+        const cita = { ...state.cita };
+        if (cita.fechaHora) {
+          cita.fechaHora = cita.fechaHora.slice(0, 16);
+        }
+        setFormData(cita);
+        console.log("📦 formData cargado desde state:", cita);
+      } else {
+        try {
+          const response = await axios.get(
+            `https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas/${id}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          const cita = response.data;
+          if (cita.fechaHora) {
+            cita.fechaHora = cita.fechaHora.slice(0, 16);
+          }
+          setFormData(cita);
+          console.log("✅ Cargando cita desde backend:", cita);
+        } catch (err) {
+          console.error("❌ Error al cargar la cita:", err);
+          setError("No se pudo cargar la cita.");
+        }
+      }
+    };
+
+    cargarDatosCita();
+  }, [state, id, token]);
 
   useEffect(() => {
     const fetchCitas = async () => {
@@ -38,6 +73,7 @@ function UpdateCita() {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
+    console.log(`✏️ Campo editado → ${id}: ${value}`);
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
@@ -53,6 +89,7 @@ function UpdateCita() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    console.log("🚀 Enviando formData:", formData);
 
     if (isFechaHoraConflicto()) {
       setError("La fecha/hora seleccionada ya está ocupada. Por favor, elige otra.");
@@ -70,18 +107,21 @@ function UpdateCita() {
       navigate("/dashboard");
     } catch (err) {
       setError("Error al actualizar la cita. Verifica los datos.");
-      console.error("Error al actualizar la cita:", err.response?.data || err.message);
+      console.error("❌ Error al actualizar la cita:", err.response?.data || err.message);
     }
   };
+
+  // Mostrar "cargando" si aún no hay datos clave
+  if (!formData.descripcion && !formData.cliente) {
+    return <div className="cita-container"><p style={{ color: "#fff" }}>Cargando cita...</p></div>;
+  }
 
   return (
     <div className="cita-container">
       <div className="cita-card">
         <h2 className="cita-title">Actualizar Cita</h2>
-
         {error && <div className="alert alert-danger">{error}</div>}
-
-        <form onSubmit={handleUpdate} className="formulario-cita">
+        <form className="formulario-cita" onSubmit={handleUpdate}>
           <div className="input-group">
             <label htmlFor="descripcion">Descripción</label>
             <input
@@ -92,7 +132,6 @@ function UpdateCita() {
               required
             />
           </div>
-
           <div className="input-group">
             <label htmlFor="fechaHora">Fecha y Hora</label>
             <input
@@ -103,7 +142,6 @@ function UpdateCita() {
               required
             />
           </div>
-
           <div className="input-group">
             <label htmlFor="cliente">Cliente</label>
             <input
@@ -114,7 +152,6 @@ function UpdateCita() {
               required
             />
           </div>
-
           <div className="input-group">
             <label htmlFor="emailCliente">Correo del Cliente</label>
             <input
@@ -125,10 +162,7 @@ function UpdateCita() {
               required
             />
           </div>
-
-          <button type="submit" className="btn btn-primary">
-            Actualizar
-          </button>
+          <button type="submit" className="btn btn-primary">Actualizar</button>
         </form>
       </div>
     </div>
