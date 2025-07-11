@@ -1,25 +1,131 @@
-/* Estilos para centrar la página */
+/* =============================
+   Contenedor principal con fondo animado
+============================= */
 .main-container {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    height: 100vh; /* Ocupa toda la altura de la pantalla */
-    width: 100vw; /* Ocupa todo el ancho de la pantalla */
-    background-color: #f4f4f4; /* Color de fondo */
-    text-align: center; /* Centrar texto */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #001f3f, #003366, #00509d);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Fondo animado con burbujas */
+.main-container::before,
+.main-container::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 20%, transparent 70%);
+  animation: floatBubbles 30s linear infinite;
+  z-index: 0;
+}
+
+.main-container::after {
+  animation-delay: 15s;
+  opacity: 0.6;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatBubbles {
+  0% {
+    transform: translateY(0) rotate(0deg);
   }
-  
-  /* Estilos para la caja de opciones */
-  .main-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    width: 400px;
+  100% {
+    transform: translateY(-100px) rotate(360deg);
   }
-  
-  /* Espacio entre botones */
-  .main-card .btn {
-    width: 100%;
-  }
-  
+}
+
+/* =============================
+   Tarjeta principal
+============================= */
+.main-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.main-card:hover {
+  transform: translateY(-4px);
+}
+
+/* =============================
+   Título y texto
+============================= */
+.main-card h2 {
+  color: #001f3f;
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.main-card p {
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+/* =============================
+   Botones empresariales modernos
+============================= */
+.main-card .btn {
+  width: 100%;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+/* Azul principal */
+.main-card .btn-primary {
+  background: linear-gradient(135deg, #003366, #005fa3);
+  border: none;
+  color: #fff;
+}
+
+.main-card .btn-primary:hover {
+  background: linear-gradient(135deg, #002b5c, #004f90);
+}
+
+/* Gris profesional */
+.main-card .btn-secondary {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  border: none;
+  color: #fff;
+}
+
+.main-card .btn-secondary:hover {
+  background: linear-gradient(135deg, #5a6268, #343a40);
+}
+
+/* Amarillo suave */
+.main-card .btn-warning {
+  background: linear-gradient(135deg, #f0ad4e, #ec9a2d);
+  border: none;
+  color: #fff;
+}
+
+.main-card .btn-warning:hover {
+  background: linear-gradient(135deg, #e6952a, #d98500);
+}

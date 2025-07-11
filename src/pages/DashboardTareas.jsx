@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Dashboard.css";
 
 function DashboardTareas() {
   const [tareas, setTareas] = useState([]);
@@ -45,55 +46,34 @@ function DashboardTareas() {
   };
 
   return (
-    <div className="container d-flex justify-content-center mt-5">
-      <div className="col-md-10"> {/* Hacemos el contenedor más ancho */}
-        <div className="card shadow-lg p-4">
-          {/* Encabezado */}
-          <h2 className="text-center fw-bold mb-3">📋 Planificador de Tareas</h2>
+    <div className="dashboard-container">
+      <div className="dashboard-card">
+        <h2>📋 <strong>Planificador de Tareas</strong></h2>
 
-          {/* Mensaje de Error */}
-          {error && <div className="alert alert-danger text-center">{error}</div>}
+        {error && <div className="alert-danger">{error}</div>}
 
-          {/* Botón para Crear Nueva Tarea */}
-          <div className="text-center mb-3">
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate("/crear-tarea")}
-            >
-              ➕ Crear Nueva Tarea
-            </button>
-          </div>
+        <div className="mb-4">
+          <button className="btn btn-primary" onClick={() => navigate("/crear-tarea")}>
+            ➕ Crear Nueva Tarea
+          </button>
+        </div>
 
-          {/* Lista de Tareas */}
-          {tareas.length === 0 ? (
-            <div className="alert alert-info text-center">
-              No hay tareas registradas.
-            </div>
-          ) : (
-            <ul className="list-group">
-              {tareas.map((tarea) => (
-                <li
-                  key={tarea.id}
-                  className="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div className="d-flex align-items-center">
-                    <span className="me-2">📌</span>
-                    <div>
-                      <strong>{tarea.nombre}</strong>
-                      <br />
-                      {tarea.descripcion} | {tarea.fechaInicio} - {tarea.fechaFin} |{" "}
-                      Estado:{" "}
-                      <span className="badge bg-secondary">{tarea.estado}</span>
-                    </div>
+        {tareas.length === 0 ? (
+          <div className="alert alert-info">No hay tareas registradas.</div>
+        ) : (
+          <ul className="list-group">
+            {tareas.map((tarea) => (
+              <li key={tarea.id} className="list-group-item">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="text-start">
+                    <strong>📌 {tarea.nombre}</strong><br />
+                    {tarea.descripcion} | {tarea.fechaInicio} - {tarea.fechaFin} |{" "}
+                    Estado: <span className="badge bg-secondary">{tarea.estado}</span>
                   </div>
                   <div>
                     <button
                       className="btn btn-sm btn-warning me-2"
-                      onClick={() =>
-                        navigate(`/update-tarea/${tarea.id}`, {
-                          state: { tarea },
-                        })
-                      }
+                      onClick={() => navigate(`/update-tarea/${tarea.id}`, { state: { tarea } })}
                     >
                       ✏️ Editar
                     </button>
@@ -104,11 +84,11 @@ function DashboardTareas() {
                       🗑 Eliminar
                     </button>
                   </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

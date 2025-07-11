@@ -1,6 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import "./Cita.css"; // Reutilizamos los estilos de Cita
 
 function UpdateTarea() {
   const { id } = useParams();
@@ -18,9 +19,11 @@ function UpdateTarea() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://api-getaway-freelancer.azure-api.net/planificador/api/tareas/${id}`, formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `https://api-getaway-freelancer.azure-api.net/planificador/api/tareas/${id}`,
+        formData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       navigate("/planificar-tareas");
     } catch (err) {
       setError("Error al actualizar la tarea.");
@@ -28,69 +31,75 @@ function UpdateTarea() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Actualizar Tarea</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">Nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            className="form-control"
-            value={formData.nombre || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="descripcion" className="form-label">Descripción</label>
-          <input
-            type="text"
-            id="descripcion"
-            className="form-control"
-            value={formData.descripcion || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="fechaInicio" className="form-label">Fecha Inicio</label>
-          <input
-            type="date"
-            id="fechaInicio"
-            className="form-control"
-            value={formData.fechaInicio || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="fechaFin" className="form-label">Fecha Fin</label>
-          <input
-            type="date"
-            id="fechaFin"
-            className="form-control"
-            value={formData.fechaFin || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="estado" className="form-label">Estado</label>
-          <select
-            id="estado"
-            className="form-select"
-            value={formData.estado || "PENDIENTE"}
-            onChange={handleInputChange}
-          >
-            <option value="PENDIENTE">PENDIENTE</option>
-            <option value="EN_PROGRESO">EN PROGRESO</option>
-            <option value="COMPLETADA">COMPLETADA</option>
-          </select>
-        </div>
-        <button type="submit" className="btn btn-primary">Actualizar</button>
-      </form>
+    <div className="cita-container">
+      <div className="cita-card">
+        <h2 className="cita-title">Actualizar Tarea</h2>
+
+        {error && <div className="alert alert-danger">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="formulario-cita">
+          <div className="input-group">
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              value={formData.nombre || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="descripcion">Descripción</label>
+            <input
+              type="text"
+              id="descripcion"
+              value={formData.descripcion || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="fechaInicio">Fecha Inicio</label>
+            <input
+              type="date"
+              id="fechaInicio"
+              value={formData.fechaInicio || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="fechaFin">Fecha Fin</label>
+            <input
+              type="date"
+              id="fechaFin"
+              value={formData.fechaFin || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="estado">Estado</label>
+            <select
+              id="estado"
+              value={formData.estado || "PENDIENTE"}
+              onChange={handleInputChange}
+            >
+              <option value="PENDIENTE">PENDIENTE</option>
+              <option value="EN_PROGRESO">EN PROGRESO</option>
+              <option value="COMPLETADA">COMPLETADA</option>
+            </select>
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Actualizar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

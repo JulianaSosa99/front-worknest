@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Dashboard.css"; 
 
 function Dashboard() {
   const [citas, setCitas] = useState([]);
@@ -45,25 +46,15 @@ function Dashboard() {
   };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{ backgroundColor: "#f8f9fa" }} // Fondo gris claro
-    >
-      <div
-        className="card p-4 shadow-lg"
-        style={{
-          width: "95%", // Más ancho
-          maxWidth: "1800px", // Máximo tamaño en pantallas grandes
-          minHeight: "550px", // Evita que sea muy pequeña
-        }}
-      >
-        <h2 className="text-center mb-4">
+    <div className="dashboard-container">
+      <div className="dashboard-card">
+        <h2>
           📅 <strong>Dashboard de Citas</strong>
         </h2>
 
-        {error && <div className="alert alert-danger text-center">{error}</div>}
+        {error && <div className="alert-danger">{error}</div>}
 
-        <div className="text-center mb-3">
+        <div className="mb-4">
           <button className="btn btn-primary" onClick={() => navigate("/crear-cita")}>
             ➕ Crear Nueva Cita
           </button>
@@ -71,11 +62,7 @@ function Dashboard() {
 
         <ul className="list-group">
           {citas.map((cita) => (
-            <li
-              key={cita.id}
-              className="list-group-item d-flex justify-content-between align-items-center"
-              style={{ fontSize: "1.1rem", padding: "15px" }}
-            >
+            <li key={cita.id} className="list-group-item">
               <div>
                 <strong>{cita.descripcion}</strong>
                 <br />

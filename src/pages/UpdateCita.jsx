@@ -1,6 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./Cita.css";
 
 function UpdateCita() {
   const { id } = useParams();
@@ -9,22 +10,24 @@ function UpdateCita() {
   const [formData, setFormData] = useState(() => {
     const cita = state?.cita || {};
     if (cita.fechaHora) {
-      cita.fechaHora = cita.fechaHora.slice(0, 16); // Formato para <input>
+      cita.fechaHora = cita.fechaHora.slice(0, 16);
     }
     return cita;
   });
   const [error, setError] = useState("");
-  const [citas, setCitas] = useState([]); // Lista de citas para validar conflictos
+  const [citas, setCitas] = useState([]);
 
   const token = localStorage.getItem("token");
 
-  // Cargar todas las citas al iniciar el componente
   useEffect(() => {
     const fetchCitas = async () => {
       try {
-        const response = await axios.get("https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setCitas(response.data);
       } catch (err) {
         console.error("Error al cargar las citas:", err.message);
@@ -33,7 +36,6 @@ function UpdateCita() {
     fetchCitas();
   }, [token]);
 
-  // Maneja cambios en los campos del formulario
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -42,26 +44,22 @@ function UpdateCita() {
     }));
   };
 
-  // Verificar si la fecha/hora está en conflicto con otra cita
   const isFechaHoraConflicto = () => {
     return citas.some(
       (cita) =>
-        cita.id !== parseInt(id) && // Ignora la cita que se está actualizando
-        cita.fechaHora === formData.fechaHora
+        cita.id !== parseInt(id) && cita.fechaHora === formData.fechaHora
     );
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    // Validar si la fecha/hora está en conflicto
     if (isFechaHoraConflicto()) {
       setError("La fecha/hora seleccionada ya está ocupada. Por favor, elige otra.");
       return;
     }
 
     try {
-      console.log("Datos enviados al backend:", formData);
       await axios.put(
         `https://api-getaway-freelancer.azure-api.net/citas/api/citas/freelancer/citas/${id}`,
         formData,
@@ -69,8 +67,7 @@ function UpdateCita() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      navigate("/dashboard"); // Redirige al dashboard después de actualizar
+      navigate("/dashboard");
     } catch (err) {
       setError("Error al actualizar la cita. Verifica los datos.");
       console.error("Error al actualizar la cita:", err.response?.data || err.message);
@@ -78,56 +75,62 @@ function UpdateCita() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Actualizar Cita</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleUpdate}>
-        <div className="mb-3">
-          <label htmlFor="descripcion" className="form-label">Descripción</label>
-          <input
-            type="text"
-            id="descripcion"
-            className="form-control"
-            value={formData.descripcion || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="fechaHora" className="form-label">Fecha y Hora</label>
-          <input
-            type="datetime-local"
-            id="fechaHora"
-            className="form-control"
-            value={formData.fechaHora || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="cliente" className="form-label">Cliente</label>
-          <input
-            type="text"
-            id="cliente"
-            className="form-control"
-            value={formData.cliente || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="emailCliente" className="form-label">Correo del Cliente</label>
-          <input
-            type="email"
-            id="emailCliente"
-            className="form-control"
-            value={formData.emailCliente || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Actualizar</button>
-      </form>
+    <div className="cita-container">
+      <div className="cita-card">
+        <h2 className="cita-title">Actualizar Cita</h2>
+
+        {error && <div className="alert alert-danger">{error}</div>}
+
+        <form onSubmit={handleUpdate} className="formulario-cita">
+          <div className="input-group">
+            <label htmlFor="descripcion">Descripción</label>
+            <input
+              type="text"
+              id="descripcion"
+              value={formData.descripcion || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="fechaHora">Fecha y Hora</label>
+            <input
+              type="datetime-local"
+              id="fechaHora"
+              value={formData.fechaHora || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="cliente">Cliente</label>
+            <input
+              type="text"
+              id="cliente"
+              value={formData.cliente || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="emailCliente">Correo del Cliente</label>
+            <input
+              type="email"
+              id="emailCliente"
+              value={formData.emailCliente || ""}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Actualizar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

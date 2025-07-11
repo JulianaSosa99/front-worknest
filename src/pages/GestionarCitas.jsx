@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Cita.css"; 
+
 
 function GestionarCitas() {
   const [citas, setCitas] = useState([]);

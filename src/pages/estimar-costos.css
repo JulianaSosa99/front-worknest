@@ -1,0 +1,211 @@
+/* =============================
+   CONTENEDOR GENERAL ESTILO CITA
+============================= */
+.estimar-container {
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #001f3f, #003366, #00509d);
+    background-size: 400% 400%;
+    animation: gradientMove 18s ease infinite;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 0;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.estimar-container::before,
+.estimar-container::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 20%, transparent 70%);
+    animation: floatBubbles 30s linear infinite;
+    z-index: 0;
+}
+
+.estimar-container::after {
+    animation-delay: 15s;
+    opacity: 0.6;
+}
+
+@keyframes floatBubbles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+    }
+}
+
+/* =============================
+   TARJETAS (Form + Listado)
+============================= */
+.estimar-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease;
+    z-index: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =============================
+   TÍTULOS
+============================= */
+.estimar-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.estimar-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #003366;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* =============================
+   FORMULARIO ESTILO MODERNO
+============================= */
+.estimar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #002c66;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #ccd3dc;
+    border-radius: 16px;
+    font-size: 15.5px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #005fa3;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 95, 163, 0.2);
+}
+
+/* =============================
+   BOTÓN SUBMIT
+============================= */
+.estimar-btn {
+    background: linear-gradient(135deg, #004080, #0074cc);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.estimar-btn:hover {
+    background: linear-gradient(135deg, #003060, #005fa3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 64, 128, 0.25);
+}
+
+/* =============================
+   TABLA ESTIMACIONES
+============================= */
+.estimar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.estimar-table th,
+.estimar-table td {
+    padding: 12px 16px;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.estimar-table th {
+    background-color: #f4f8fc;
+    font-weight: 600;
+    color: #003366;
+}
+
+.estimar-table tr:hover {
+    background-color: #f0f8ff;
+}
+
+.estimar-badge {
+    background-color: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .estimar-card {
+        padding: 30px 20px;
+    }
+
+    .estimar-title {
+        font-size: 2rem;
+    }
+
+    .estimar-subtitle {
+        font-size: 1.25rem;
+    }
+}

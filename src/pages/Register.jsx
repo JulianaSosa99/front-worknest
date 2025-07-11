@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./login.css"; // Asegúrate de importar el CSS que contiene las clases como login-container, login-card, etc.
 
 function Register() {
   const [name, setName] = useState("");
@@ -12,11 +13,14 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://api-getaway-freelancer.azure-api.net/login/api/freelancer/register", {
-        nombre: name,
-        correo: email,
-        contrasena: password,
-      });
+      await axios.post(
+        "https://api-getaway-freelancer.azure-api.net/login/api/freelancer/register",
+        {
+          nombre: name,
+          correo: email,
+          contrasena: password,
+        }
+      );
       alert("Registro exitoso. Ahora puedes iniciar sesión.");
       navigate("/");
     } catch (err) {
@@ -25,11 +29,12 @@ function Register() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Registrarse</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleRegister}>
-        <div className="mb-3">
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Crear una cuenta</h2>
+        {error && <div className="alert alert-danger">{error}</div>}
+
+        <form onSubmit={handleRegister}>
           <label htmlFor="name" className="form-label">Nombre</label>
           <input
             type="text"
@@ -39,8 +44,7 @@ function Register() {
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </div>
-        <div className="mb-3">
+
           <label htmlFor="email" className="form-label">Correo</label>
           <input
             type="email"
@@ -50,8 +54,7 @@ function Register() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div className="mb-3">
+
           <label htmlFor="password" className="form-label">Contraseña</label>
           <input
             type="password"
@@ -61,9 +64,14 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <button type="submit" className="btn btn-primary">Registrarse</button>
-      </form>
+
+          <button type="submit" className="btn btn-primary w-100">
+            Registrarse
+          </button>
+        </form>
+
+        <p className="mt-3">¿Ya tienes una cuenta? <a href="/">Inicia sesión</a></p>
+      </div>
     </div>
   );
 }
